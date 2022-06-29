@@ -16,6 +16,23 @@
 | order | GET | `/api/orders/:id(.:format)` | orders#show {:format=>:json} |
 | available_cities | GET | `/api/available_cities(.:format)` | available_cities#index {:format=>:json} |
 
+POST -> Orders
+```json
+{
+    "order":{
+        "name": "Leonardo Marcedo",
+        "phone_number": "22912345678",
+        "city": "Curitiba",
+        "neighborhood": "Tingui",
+        "number": "115",
+        "complement": "apartamento 4",
+        "order_products_attributes": [
+            { "quantity": 1, "product_id": 1 },
+            { "quantity": 9, "product_id": 2 }
+        ]
+    }
+}
+```
 ## Filters
 ```bash
 curl http://localhost:3000/api/restaurants?
