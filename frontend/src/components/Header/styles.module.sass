@@ -1,0 +1,25 @@
+@import '../../sass/colors.sass'
+
+.contentHeader
+    background: $menu-header
+    color: $text-principal-contrast
+
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    align-items: center
+
+    .menu
+        & > ul
+            color: $custom-white
+            list-style: none
+            display: flex
+            & > li a
+                text-decoration: none
+                color: $custom-white
+                transition: .7s color
+                
+                display: inline-block
+                padding: .7rem 1.5rem
+                &:hover
+                    color: $text-principal-contrast

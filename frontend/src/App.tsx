@@ -1,11 +1,21 @@
-import styles from './App.module.sass'
+import { Header } from './components/Header'
+import { Home } from './pages/Home'
+import styles from './sass/App.module.sass'
+
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+
 
 function App() {
 
   return (
-    <div className={styles.contentWrapper}>
-      <header className={styles.header}>hello world</header>
-    </div>
+    <div className={styles.contentWrapper}>    
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+      </Switch>
+    </Router>
+  </div>
   )
 }
 
