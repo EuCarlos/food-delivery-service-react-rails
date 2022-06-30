@@ -1,11 +1,16 @@
 # Food delivery MVP
-
+🌐 _Para a versão em português deste README, [clique aqui](./docs/locales/pt-br/README.md)._
 ## Requirements:
-* Ruby 2.7.3
-* Rails 6.1.3
-* SQLite
+* Backend
+    * Ruby 2.7.3
+    * Rails 6.1.3
+    * SQLite
+* Frontend
+    * React
+    * TypeScript
 
-
+## Installation:
+## Configuration:
 ## Routes
 | Prefix | Verb | URI Pattern | Controller#Action
 | :----: | :--: | :--------- | :----------------
@@ -20,9 +25,11 @@ POST -> Orders
 ```json
 {
     "order":{
-        "name": "Leonardo Marcedo",
+        "name": "Carlos Alves",
         "phone_number": "22912345678",
+        "restaurant_id": 1,
         "city": "Curitiba",
+        "street": "São João",
         "neighborhood": "Tingui",
         "number": "115",
         "complement": "apartamento 4",
@@ -40,3 +47,20 @@ curl http://localhost:3000/api/restaurants?
     &city=Maceio        # filter by city
     &category=mexicana  # filter by category
 ```
+
+## How to contribute to this project?
+Before starting, check and follow the instructions for contributing to the repository. If not, you can follow the instructions below:
+
+1. Fork the project
+2. Create a new branch: git checkout -b nova-branch
+3. Commit your changes: git commit -m 'I added something'
+4. Push to branch: git push origin nova-branch
+5. Open a Pull Request
+
+## How do I report a bug or request a feature?
+If you want to report a bug or request a feature, go to [Issue](https://github.com/eucarlos/food-delivery-service-react-rails/issues) on the GitHub Project and add your request.
+
+___
+
+<p align="center">
+Created with 💜 by <a href="https://github.com/eucarlos/">Carlos Alves</a></p>
