@@ -1,0 +1,78 @@
+@import '../../sass/colors'
+
+.highlight
+    color: $custom-yellow
+
+.contentWrapper
+    .contentTop
+        background: $text-principal-contrast
+        border-left: 2rem solid $custom-yellow
+        color: $menu-header
+
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+        & .text
+            padding: 2rem
+            & h1
+                font-size: 4rem
+                margin: 0
+            & p
+                font-size: 1.5rem
+                margin-top: .5rem
+            & img
+                width: 7rem
+                margin-right: 1rem
+        & .image img
+            width: 20rem
+        
+    .contentCategories
+        & ul
+            display: flex
+            flex-direction: row
+            margin: 0
+            padding: 0
+            & li
+                background: $text-principal-contrast
+                list-style: none
+                width: calc(100% / 5)
+                height: 12rem
+                overflow: hidden
+                cursor: pointer
+
+                position: relative
+                &:after
+                    position: absolute
+                    content:""
+                    height:100%
+                    width:100%
+                    top:0
+                    left:0
+                    background: linear-gradient(180deg, rgba(43, 45, 66, 0) 50%, #2B2D42 100%)
+                &:hover::after
+                     background: linear-gradient(180deg, rgba(43, 45, 66, 0) 0%, #2B2D42 100%)
+                & img
+                    width: 100%
+                & .titleImage
+                    position: absolute
+                    bottom: 2px
+                    left: 10px
+
+                    color: $menu-header
+                    font-size: 2rem
+                    font-weight: bold
+                    z-index: 2
+                &.moreCategories
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    background: linear-gradient(270deg, #2B2D42 0%, #F7E733 100%)
+                    &:hover
+                        background: linear-gradient(270deg, #2B2D42 30%, #F7E733 100%)
+                    & svg
+                        fill: $menu-header
+                    &::after
+                        background: #ffffff00
+
+                    
