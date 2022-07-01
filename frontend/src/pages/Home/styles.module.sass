@@ -1,0 +1,89 @@
+@import '../../sass/colors'
+
+.highlight
+    color: $custom-yellow
+
+.contentWrapper
+    display: flex
+    justify-content: center
+    flex-direction: column
+    align-items: center
+    & .textTop
+        color: $text-principal-contrast
+        display: flex
+        align-items: center
+        justify-content: center
+        & .text
+            width: 40rem
+            margin-right: 1.5rem
+            & h1
+                font-size: 4rem
+                margin: 0
+            & p
+                font-size: 1.5rem
+
+    & .image img
+        width: 20rem
+
+    & .searchButton
+        width: 62rem
+        margin: 1rem 0
+        & a
+            color: $custom-white
+            background: $text-principal-contrast
+            padding: .7rem 1.5rem
+            border-radius: 50px
+            text-decoration: none
+            display: inline-block
+            & svg
+                border-right: solid 1px $custom-white
+                padding-right: 3px
+                vertical-align: bottom
+            &:hover
+                color: $menu-header
+
+    & footer
+        background: $text-principal-contrast
+        color: $menu-header
+        width: 58rem
+        margin-top: 2rem
+        padding: 3rem 3rem 0 3rem
+        border-radius: 0 100px 0 0
+
+        display: flex
+        flex-direction: row
+        align-items: center
+        & h2
+            font-size: 3rem
+            margin: 0 0 1rem 0
+        & .textFooter .reviews
+            display: flex
+            flex-direction: row
+            font-weight: bold
+            .textReviews
+                margin-left: 1rem
+            & h3, p
+                margin: 0
+            & p
+                font-size: .9rem
+            & svg
+                fill: $custom-yellow
+                vertical-align: bottom
+                margin: 0
+            & .reviewsHighlight
+                color: $custom-white
+                font-weight: normal
+        
+        & .ideas ul
+            display: flex
+            flex-direction: row
+            list-style: none
+            margin: 0
+            & li
+                background: $custom-yellow
+                color: $text-principal-contrast
+                width: 8rem
+                padding: 1rem
+                border-radius: 100px 100px 0 0
+                margin-right: 1rem
+                text-align: center
