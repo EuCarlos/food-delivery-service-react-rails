@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 **/sass/colors.sass
+**/assets/*
