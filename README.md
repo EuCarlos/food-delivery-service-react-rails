@@ -1,6 +1,16 @@
 # Food delivery MVP
 🌐 _Para a versão em português deste README, [clique aqui](./docs/locales/pt-br/README.md)._
-## Requirements:
+
+## Summary
+- [1. Requirements:](#1-requirements)
+- [2. Installation:](#2-installation)
+    - [2.1. Backend](#21-backend)
+    - [2.2. Frontend](#22-frontend)
+- [3. Routes](#3-routes)
+- [4. Filters](#4-filters)
+- [5. How to contribute to this project?](#5-how-to-contribute-to-this-project)
+- [6. How do I report a bug or request a feature?](#6-how-do-i-report-a-bug-or-request-a-feature)
+## 1. Requirements:
 * Backend
     * Ruby 2.7.3
     * Rails 6.1.3
@@ -8,10 +18,45 @@
 * Frontend
     * React
     * TypeScript
+    * Vite
+    * Yarn
 
-## Installation:
-## Configuration:
-## Routes
+## 2. Installation:
+Clone the repo:
+```bash
+git clone https://github.com/EuCarlos/food-delivery-service-react-rails.git && cd food-delivery-service-react-rails
+```
+### 2.1. Backend
+
+Install dependencies using Yarn or NPM:
+
+```bash
+cd backend && bundle install
+```
+**Configuration:**
+
+Database creation
+```bash
+rails db:create
+```
+Database initialization
+```bash
+rails db:migrate
+```
+**Run the project**
+```bash
+rails s
+```
+### 2.2. Frontend
+Install the dependencies using Yarn:
+```bash
+cd frontend && yarn install
+```
+**Run the project**
+```bash
+yarn dev
+```
+## 3. Routes
 | Prefix | Verb | URI Pattern | Controller#Action
 | :----: | :--: | :--------- | :----------------
 | categories | GET | `/api/categories(.:format)` | categories#index {:format=>:json} |
@@ -40,7 +85,7 @@ POST -> Orders
     }
 }
 ```
-## Filters
+## 4. Filters
 ```bash
 curl http://localhost:3000/api/restaurants?
     q=bravo             # filter by query
@@ -48,7 +93,7 @@ curl http://localhost:3000/api/restaurants?
     &category=mexicana  # filter by category
 ```
 
-## How to contribute to this project?
+## 5. How to contribute to this project?
 Before starting, check and follow the instructions for contributing to the repository. If not, you can follow the instructions below:
 
 1. Fork the project
@@ -57,7 +102,7 @@ Before starting, check and follow the instructions for contributing to the repos
 4. Push to branch: git push origin nova-branch
 5. Open a Pull Request
 
-## How do I report a bug or request a feature?
+## 6. How do I report a bug or request a feature?
 If you want to report a bug or request a feature, go to [Issue](https://github.com/eucarlos/food-delivery-service-react-rails/issues) on the GitHub Project and add your request.
 
 ___
