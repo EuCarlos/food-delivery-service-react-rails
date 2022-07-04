@@ -5,6 +5,7 @@ import { MdStar } from 'react-icons/md'
 import ios from '../../assets/button-ios.png'
 import android from '../../assets/button-android.png'
 import food from '../../assets/food.png'
+import { Footer } from '../../components/Footer'
 
 export function Restaurants () {
 
@@ -148,6 +149,8 @@ export function Restaurants () {
                     </a>
                 </div>
             </div>
+
+            <Footer />
         </section>
     )
 }

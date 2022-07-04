@@ -1,0 +1,30 @@
+@import '../../sass/colors'
+
+footer.contentFooter
+    margin-top: .5rem
+    background: $text-principal-contrast
+    color: #fff
+    padding: 1rem 0
+
+    display: flex
+    justify-content: space-around
+    align-items: center
+    & svg
+        fill: $custom-yellow
+        vertical-align: bottom
+    & a
+        display: inline-block
+        color: $custom-yellow
+        font-weight: bold
+        text-decoration: none
+        transition: color .7s
+        &:hover
+            color: $custom-yellow-hover
+    & ul
+        display: flex
+        flex-direction: row
+
+        list-style: none
+        margin: 0
+        & li
+            margin-left: 1rem
