@@ -3,6 +3,20 @@
 .highlight
     color: $custom-yellow
 
+@mixin gradient-image($percentage-top, $percentage-bottom)
+    position: absolute
+    content:""
+    height:100%
+    width:100%
+    top:0
+    left:0
+    background: linear-gradient(180deg, rgba(43, 45, 66, 0) $percentage-top, #2B2D42 $percentage-bottom)
+
+@mixin content-align-center ()
+    display: flex
+    justify-content: center
+    align-items: center 
+
 .contentWrapper
     .contentTop
         background: $text-principal-contrast
@@ -43,13 +57,7 @@
 
                 position: relative
                 &:after
-                    position: absolute
-                    content:""
-                    height:100%
-                    width:100%
-                    top:0
-                    left:0
-                    background: linear-gradient(180deg, rgba(43, 45, 66, 0) 50%, #2B2D42 100%)
+                   @include gradient-image(50%, 100%)
                 &:hover::after
                      background: linear-gradient(180deg, rgba(43, 45, 66, 0) 0%, #2B2D42 100%)
                 & img
@@ -75,4 +83,54 @@
                     &::after
                         background: #ffffff00
 
-                    
+    & .restaurantsList
+        @include content-align-center
+        flex-direction: column
+        & h2
+            text-align: center
+            margin: 1.5rem 0 .5rem 0
+            
+            color: $text-principal-contrast
+            font-size: 2rem
+
+        & .cards
+            padding: 1rem
+            @include content-align-center
+            flex-wrap: wrap
+            width: 60rem
+            & a
+                text-decoration: none
+                color: $menu-header
+                & .card
+                    margin: .5rem
+                    width: 14rem
+                    height: 27rem
+                    overflow: hidden
+                    position: relative
+                    &:after
+                        @include gradient-image(0%, 80%)
+                    & img
+                        height: 100%
+                    & > .contentCard
+                        position: absolute
+                        bottom: .5rem
+                        left: .5rem
+                        z-index: 2
+                        & p, h4
+                            margin: 0
+                        & h4
+                            font-weight: bold
+                            font-size: 1.2rem
+                        & .restaurantDeliveryValue
+                            margin: .2rem
+                            width: 8rem
+                            border: dashed 2px $menu-header
+                            text-align: center
+                            font-size: .8rem
+                            padding: .2rem 0
+                        & .restaurantReviews
+                            color: $custom-yellow
+                            font-size: 1.1rem
+                            font-weight: bold
+                            & svg
+                                vertical-align: top
