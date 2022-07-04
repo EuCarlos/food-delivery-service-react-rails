@@ -1,8 +1,8 @@
 @import '../../sass/colors.sass'
 
 .contentHeader
-    background: $menu-header
-    color: $text-principal-contrast
+    background: $custom-full-white
+    color: $custom-blue-dark
 
     display: flex
     flex-direction: row
@@ -16,25 +16,25 @@
             display: flex
             & > li a
                 text-decoration: none
-                color: $text-principal-contrast
+                color: $custom-blue-dark
                 transition: .7s color
                 
                 display: inline-block
                 padding: .7rem 1.5rem
                 &:hover
-                    color: $text-principal-contrast-2
+                    color: $custom-blue-dark-contrast
                 & svg
                     vertical-align: bottom
                 &.shoppingCart
-                    background: $text-principal-contrast
-                    color: $menu-header
+                    background: $custom-blue-dark
+                    color: $custom-full-white
                     padding: .9em 1rem
                     border-radius: 50px
 
                     position: relative
                     & .notification
                         background: $custom-yellow
-                        color: $text-principal-contrast
+                        color: $custom-blue-dark
                         padding: .2rem .5rem
                         border-radius: 50px
 
