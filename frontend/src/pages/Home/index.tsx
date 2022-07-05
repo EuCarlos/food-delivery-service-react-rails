@@ -4,8 +4,11 @@ import avatars from '../../assets/avatars.png'
 import { MdSearch, MdStar } from 'react-icons/md'
 import { FaTruck, FaShoppingBag, FaUtensils } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { modifyTitle } from '../../services/modifyTitle'
 
 export function Home () {
+
+    modifyTitle("Inicio")
     return (
         <section className={styles.contentWrapper}>
             <div className={styles.textTop}>
