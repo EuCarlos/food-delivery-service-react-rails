@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './styles.module.sass'
 import { FaArrowRight } from 'react-icons/fa'
 import { MdStar } from 'react-icons/md'
@@ -11,6 +12,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { toCurrency } from '../../services/toCurrency'
 import { modifyTitle } from '../../services/modifyTitle'
+import { randomIntFromInterval } from '../../services/randomIntFromInterval'
 
 
 type RestaurantProps = {
@@ -80,17 +82,17 @@ export function Restaurants () {
                         <div>Nenhum restaurante encontrado</div>
                         : restaurants.map(({ id, name, image_url, delivery_tax  }) => {
                             return (
-                                <a href="#">
+                                <Link to={`/restaurante/${id}`}>
                                     <div className={styles.card} >
                                         <div className={styles.contentCard}>
                                             <h4>{name}</h4>
                                             <p className={styles.restaurantType}>Comida Italiana</p>
                                             <p className={styles.restaurantDeliveryValue}>Entrega {toCurrency(delivery_tax)}</p>
-                                            <p className={styles.restaurantReviews}><MdStar /> 4.5</p>
+                                            <p className={styles.restaurantReviews}><MdStar /> {randomIntFromInterval(4.4, 5.1)}</p>
                                         </div>
                                         <img src={image_url} alt={name} />
                                     </div>
-                                </a>
+                                </Link>
                             )
                         })
                     }
