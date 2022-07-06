@@ -13,13 +13,15 @@ import { api } from '../../services/api'
 import { toCurrency } from '../../services/toCurrency'
 import { modifyTitle } from '../../services/modifyTitle'
 import { randomIntFromInterval } from '../../services/randomIntFromInterval'
+import { Loading } from '../../components/Loading'
 
 
 type RestaurantProps = {
     id: number,
     name: string,
     image_url: string,
-    delivery_tax: number
+    delivery_tax: number,
+    category_title: string,
 }
 
 export function Restaurants () {
@@ -27,20 +29,47 @@ export function Restaurants () {
     modifyTitle("Restaurantes")
     
     const [ restaurants, setRestaurants ] = useState<RestaurantProps[]>([])
+    const [ isLoading, setIsLoading ] = useState<boolean>(true)
 
     useEffect(() => {
         api
             .get<RestaurantProps[]>('/api/restaurants')
             .then((response) => setRestaurants(response.data))
-            .catch((err) => alert("Ops, ocorreu um erro: " + err))
+            .catch((err) => console.log("Ops, ocorreu um erro: " + err))
+            .finally(() => setIsLoading(false))
     }, [])
+
+    const getRestaurants = () => {
+        if (restaurants.length <= 0 && isLoading === false) {
+            return (<div>Nenhum restaurante encontrado</div>)
+            
+        } else if (isLoading) {
+            return (<Loading />)
+        } else {
+            return restaurants.map(({ id, name, image_url, delivery_tax, category_title  }) => {
+                return (
+                    <Link to={`/restaurante/${id}`}>
+                        <div className={styles.card}>
+                            <div className={styles.contentCard}>
+                                <h4>{name}</h4>
+                                <p className={styles.restaurantType}>Comida {category_title}</p>
+                                <p className={styles.restaurantDeliveryValue}>Entrega {toCurrency(delivery_tax)}</p>
+                                <p className={styles.restaurantReviews}><MdStar /> {randomIntFromInterval(4.4, 5.1)}</p>
+                            </div>
+                            <img src={image_url} alt={name} />
+                        </div>
+                    </Link>
+                )
+            })
+        }
+    }
 
     return (
         <section className={styles.contentWrapper}>
             <div className={styles.contentTop}>
                 <div className={styles.text}>
                     <h1>Entrega<br/><span className={styles.highlight}>mais rápida</span> &<br/> <span className={styles.highlight}>coleta</span> fácil.</h1>
-                    <p>Faça o download nas seguintes plataformas:</p>
+                    <p>Faça o download do app nas seguintes plataformas:</p>
                     <div>
                         <img src={ios} alt="botão de baixar aplicativo do Food Delivery via sistema iphone" />
                         <img src={android} alt="botão de baixar aplicativo do Food Delivery via sistema android" />
@@ -78,24 +107,7 @@ export function Restaurants () {
             <div className={styles.restaurantsList}>
                 <h2>Lista de Restaurantes</h2>
                 <div className={styles.cards}>
-                    {restaurants.length <= 0 ? 
-                        <div>Nenhum restaurante encontrado</div>
-                        : restaurants.map(({ id, name, image_url, delivery_tax  }) => {
-                            return (
-                                <Link to={`/restaurante/${id}`}>
-                                    <div className={styles.card} >
-                                        <div className={styles.contentCard}>
-                                            <h4>{name}</h4>
-                                            <p className={styles.restaurantType}>Comida Italiana</p>
-                                            <p className={styles.restaurantDeliveryValue}>Entrega {toCurrency(delivery_tax)}</p>
-                                            <p className={styles.restaurantReviews}><MdStar /> {randomIntFromInterval(4.4, 5.1)}</p>
-                                        </div>
-                                        <img src={image_url} alt={name} />
-                                    </div>
-                                </Link>
-                            )
-                        })
-                    }
+                    { getRestaurants() }
                 </div>
             </div>
 

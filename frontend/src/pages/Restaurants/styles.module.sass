@@ -110,6 +110,8 @@
                     position: relative
                     &:after
                         @include gradient-image(0%, 80%)
+                    &:hover::after
+                        background: linear-gradient(180deg, #2b2d4200 0%, #2B2D42 100%)
                     & img
                         height: 100%
                     & > .contentCard
@@ -129,6 +131,8 @@
                             text-align: center
                             font-size: .8rem
                             padding: .2rem 0
+                        & .restaurantType
+                            text-transform: capitalize
                         & .restaurantReviews
                             color: $custom-yellow
                             font-size: 1.1rem
