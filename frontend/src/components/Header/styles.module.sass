@@ -27,7 +27,7 @@
                     vertical-align: bottom
                 &.shoppingCart
                     background: $custom-blue-dark
-                    color: $custom-full-white
+                    color: $custom-white
                     padding: .9em 1rem
                     border-radius: 50px
 
@@ -41,3 +41,33 @@
                         position: absolute
                         top: 1px
                         right: -12px
+                    &:hover
+                        background: $custom-blue-dark-contrast
+                    &:hover > svg
+                        fill: $custom-full-white
+
+            & .searchBar
+                background: #2b2d42
+                border: solid 2px $custom-blue-dark
+                border-radius: 25px
+                margin-right: .5rem
+                overflow: hidden
+
+                display: flex
+                align-items: center
+                & input[type="search"]
+                    padding: .9rem
+                    border: none
+                    color: $custom-blue-dark
+                    outline: none
+                & button
+                    background: $custom-blue-dark
+                    padding: 0 1rem
+                    border: none
+                    cursor: pointer
+                    & svg
+                        fill: $custom-white                            
+                &:hover, &:hover > button
+                    background: $custom-blue-dark-contrast
+                &:hover > button > svg
+                    fill: $custom-full-white
