@@ -1,52 +1,54 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+import { Error } from '../Error'
 import { Footer } from "../../components/Footer"
+
+import { api } from '../../services/api'
 import { modifyTitle } from "../../services/modifyTitle"
+import { toCurrency } from "../../services/toCurrency"
+
 import styles from './styles.module.sass'
+import { isEmpty } from "../../services/isEmpty"
 
 export function Restaurant (props: any) {
     modifyTitle(`Restaurante ${props.match.params.id}`)
-
-    // remover antes de subir
-    type FoodListProps = {
+    
+    type RestaurantProps = {
+        id: number,
         name: string,
-        image: string,
         description: string,
-        price: number
+        delivery_tax: number,
+        image_url: string,
+        product_categories: [{ 
+                title: string,
+                products: [{
+                    id: string,
+                    name: string,
+                    description: string,
+                    price: number,
+                    image_url: string
+                }]
+        }]
     }
-    const FoodList: FoodListProps[] = [
-        {
-            name: "Nacho Guacamole",
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-            description: "Tortilha com guacamole",
-            price: 19
-        },
-        {
-            name: "Nacho Guacamole",
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-            description: "Tortilha com guacamole",
-            price: 19
-        },
-        {
-            name: "Nacho Guacamole",
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-            description: "Tortilha com guacamole",
-            price: 19
-        },
-        {
-            name: "Nacho Guacamole",
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-            description: "Tortilha com guacamole",
-            price: 19
-        },
-        {
-            name: "Nacho Guacamole",
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-            description: "Tortilha com guacamole",
-            price: 19
-        }
-    ]
+
+    type ProductsProps = {
+        id: number, 
+        name: string, 
+        description: string, 
+        price: number, 
+        image_url: string
+    }
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [restaurant, setRestaurant] = useState<RestaurantProps>()
+
+    useEffect(() => {
+        api
+            .get<RestaurantProps>(`/api/restaurants/${props.match.params.id}`)
+            .then((response) => setRestaurant(response.data))
+            .catch((err) => console.log("Ops, ocorreu um erro: " + err))
+            .finally(() => setIsLoading(false))
+    }, [])
 
     const Loading = () => {
         return (
@@ -72,42 +74,57 @@ export function Restaurant (props: any) {
             <div className={styles.contentWrapper}>
                 <div className={styles.detailsRestaurant}>
                     <div className={styles.imageRestaurant}>
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+                        <img src={restaurant?.image_url} alt={restaurant?.name} />
                     </div>
                     <div className={styles.restaurant}>
-                        <h2>Los sombreros</h2>
-                        <p>Nostrud in consectetur labore eu occaecat eu aliqua proident excepteur. Aliqua sit exercitation elit ea cupidatat ut consectetur et velit minim proident ut amet pariatur. Ad duis mollit eiusmod quis. Laborum amet aliquip sunt nostrud minim voluptate qui anim. Aute amet laborum id mollit labore.</p>
-                        <p className={styles.price}>Entrega R$ 5,20</p>
+                        <h2>{restaurant?.name}</h2>
+                        <p>{restaurant?.description}</p>
+                        {restaurant?.delivery_tax ? <p className={styles.price}>Entrega {toCurrency(restaurant.delivery_tax)}</p> : ''} 
                     </div>
                 </div>
                 <div className={styles.products}>
-                    <div>
-                        <h2>Pratos Mexicanos</h2>
-                    </div>
-                    <div className={styles.plates}>
-                    {FoodList.map(({name, image, description, price}) => {
-                            return (
-                                <div className={styles.plate}>
-                                    <img src={image} alt={description} />
-                                    <div className={styles.info}>
-                                        <h3>{name}</h3>
-                                        <p>{description}</p>
-                                        <p className={styles.price}>R$ {price}</p>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                    </div>
+                    {restaurant?.product_categories.map(({title, products}) => {
+                        return (<>
+                            <div>
+                                <h2>{title}</h2>
+                            </div>
+                            <div className={styles.plates}>
+                            {products.map(({id, name, description, price, image_url})  => {
+                                    return (
+                                        <div className={styles.plate} id={`r${id}`}>
+                                            <img src={image_url} alt={description} />
+                                            <div className={styles.info}>
+                                                <h3>{name}</h3>
+                                                <p>{description}</p>
+                                                <p className={styles.price}>{toCurrency(price)}</p>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            </div>
+                        </>)
+                    })}
+                    
+                    
                 </div>
             </div>
         )
     }
     
+    const getRestaurant = () =>{
+        if (isEmpty(restaurant || {}) && isLoading === false) {
+            return <Error />
+        } else if (isLoading) {
+            return Loading()
+        } else {
+            return renderRestaurant()
+        }
+    }
 
     return (
         <section>
-            {Loading()}
+            {getRestaurant()}
             <Footer />
         </section>
     )
