@@ -9,6 +9,8 @@ import food from '../../assets/food.png'
 import { Footer } from '../../components/Footer'
 
 import { useEffect, useState } from 'react'
+import { toSlug } from '../../services/toSlug'
+import { useQuery } from '../../services/useQuery'
 import { api } from '../../services/api'
 import { toCurrency } from '../../services/toCurrency'
 import { modifyTitle } from '../../services/modifyTitle'
@@ -28,12 +30,20 @@ export function Restaurants () {
 
     modifyTitle("Restaurantes")
     
+    const query = useQuery()
+    
+    const queryParams = {
+        q: query.get('q') ? `q=${query.get('q')}` : '',
+        city: query.get('city') ? `city=${query.get('city')}` : '',
+        category: query.get('category') ? `category=${query.get('category')}` : ''
+    }
+
     const [ restaurants, setRestaurants ] = useState<RestaurantProps[]>([])
     const [ isLoading, setIsLoading ] = useState<boolean>(true)
 
     useEffect(() => {
         api
-            .get<RestaurantProps[]>('/api/restaurants')
+            .get<RestaurantProps[]>(`/api/restaurants?${queryParams.q}&${queryParams.city}&${queryParams.category}`) // ?q=los&city=Curitiba&category=mexicana
             .then((response) => setRestaurants(response.data))
             .catch((err) => console.log("Ops, ocorreu um erro: " + err))
             .finally(() => setIsLoading(false))
@@ -48,7 +58,7 @@ export function Restaurants () {
         } else {
             return restaurants.map(({ id, name, image_url, delivery_tax, category_title  }) => {
                 return (
-                    <Link to={`/restaurante/${id}`}>
+                    <Link to={`/restaurante/${toSlug(name)}`}>
                         <div className={styles.card}>
                             <div className={styles.contentCard}>
                                 <h4>{name}</h4>

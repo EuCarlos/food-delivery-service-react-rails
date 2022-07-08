@@ -11,7 +11,6 @@ import styles from './styles.module.sass'
 import { isEmpty } from "../../services/isEmpty"
 
 export function Restaurant (props: any) {
-    modifyTitle(`Restaurante ${props.match.params.id}`)
     
     type RestaurantProps = {
         id: number,
@@ -121,6 +120,8 @@ export function Restaurant (props: any) {
             return renderRestaurant()
         }
     }
+
+    modifyTitle(`Restaurante ${restaurant?.name || 'Não Encontrado'}`)
 
     return (
         <section>
