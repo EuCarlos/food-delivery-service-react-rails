@@ -1,0 +1,121 @@
+@import '../../sass/colors'
+
+@mixin content-align-center ()
+    display: flex
+    justify-content: center
+    align-items: center 
+
+@mixin gradient-image($percentage-top, $percentage-bottom)
+    position: absolute
+    content:""
+    height:100%
+    width:100%
+    top:0
+    left:0
+    background: linear-gradient(180deg, rgba(43, 45, 66, 0) $percentage-top, #2B2D42 $percentage-bottom)
+
+@keyframes loading
+    from
+        background: #c5c5c5
+    to
+        background: #9e9a9a
+
+.price
+    margin: .2rem
+    border: dashed 2px $custom-blue-dark
+    text-align: center
+    font-size: .8rem
+    padding: .2rem 2rem
+    display: inline-block
+
+section
+    & .contentWrapper
+        @include content-align-center
+        flex-direction: column
+        color: $custom-blue-dark
+        & .detailsRestaurant
+            display: flex
+            border: solid 1px $custom-blue-dark
+            padding: .5rem
+            width: 60rem
+            & .imageRestaurant
+                width: 90rem
+                height: 20rem
+                overflow: hidden
+                & img
+                    height: 100%
+            & .restaurant
+                padding: .5rem
+                h2
+                    margin: 0
+                p
+                    text-align: justify
+        
+        & .products
+            width: 60rem
+            & h2
+                margin: 1rem 0
+                font-size: 2rem
+            & .plates
+                @include content-align-center
+                flex-wrap: wrap
+                .plate
+                    margin: 1rem
+                    width: calc(100% / 3.5)
+                    height: 27rem
+                    overflow: hidden
+                    position: relative
+                    &:after
+                        @include gradient-image(0%, 80%)
+                    &:hover::after
+                        background: linear-gradient(180deg, #2b2d4200 0%, #2B2D42 100%)
+                    & img
+                        height: 100%
+                    & .info
+                        color: $custom-full-white
+                        position: absolute
+                        bottom: .5rem
+                        left: .5rem
+                        z-index: 2
+                        & .price
+                            border-color: $custom-full-white
+                        & h3
+                            color: $custom-yellow
+                            margin: 0
+
+    & .contentLoading
+        @include content-align-center
+        flex-direction: column
+        & .detailsRestaurantLoading
+            display: flex
+            animation: loading 2s linear infinite
+            padding: .5rem
+            width: 60rem
+            & .imageRestaurant
+                width: 90rem
+                height: 20rem
+                background: #c5c5c5
+                animation: loading 1s linear infinite
+        & .productsLoading
+            width: 60rem
+            & .textLoading
+                width: 100%
+                height: 1rem
+                margin: 1rem 0
+                background: #c5c5c5
+                animation: loading 2s linear infinite
+            & .plates
+                @include content-align-center
+                flex-wrap: wrap
+                .plate
+                    margin: 1rem
+                    width: calc(100% / 3.5)
+                    height: 27rem
+                    background: #c5c5c5
+                    animation: loading 3s linear infinite
+                    &#first
+                        animation-delay: .1s
+                    &#second
+                        animation-delay: .2s
+                    &#third
+                        animation-delay: .3s

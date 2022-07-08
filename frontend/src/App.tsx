@@ -4,6 +4,7 @@ import styles from './sass/App.module.sass'
 
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Restaurants } from './pages/Restaurants'
+import { Restaurant } from './pages/Restaurant'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/restaurantes" exact component={Restaurants} />
+        <Route path="/restaurante/:id" exact component={Restaurant} />
       </Switch>
     </Router>
   </div>
