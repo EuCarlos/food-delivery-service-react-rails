@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './styles.module.sass'
-import { FaArrowRight } from 'react-icons/fa'
-import { MdStar } from 'react-icons/md'
+import { MdStar, MdAdd } from 'react-icons/md'
 
 import ios from '../../assets/button-ios.png'
 import android from '../../assets/button-android.png'
@@ -26,6 +25,12 @@ type RestaurantProps = {
     category_title: string,
 }
 
+type CategoryProps = {
+    id?: number,
+    title?: string,
+    image_url?: string
+}
+
 export function Restaurants () {
 
     modifyTitle("Restaurantes")
@@ -39,6 +44,7 @@ export function Restaurants () {
     }
 
     const [ restaurants, setRestaurants ] = useState<RestaurantProps[]>([])
+    const [ categories, setCategories ] = useState<CategoryProps[]>([])
     const [ isLoading, setIsLoading ] = useState<boolean>(true)
 
     useEffect(() => {
@@ -48,6 +54,32 @@ export function Restaurants () {
             .catch((err) => console.log("Ops, ocorreu um erro: " + err))
             .finally(() => setIsLoading(false))
     }, [])
+
+    useEffect(() => {
+        api
+            .get<CategoryProps[]>('/api/categories')
+            .then((response) => setCategories(response.data))
+            .catch((err) => console.log("Ops, ocorreu um erro: " + err))
+    }, [])
+
+    const getCategories = () => {
+        if (categories.length <= 0) {
+            <li>Sem categorias</li>
+        } else {
+            return (
+                categories.filter((category, index) => index <= 3).map(({ title, image_url }) => {
+                return (
+                    <a href={`/restaurantes?category=${title}`}>
+                        <li>
+                            <span className={styles.titleImage}>{title}</span>
+                            <img src={image_url} alt={`comida ${title}`} />
+                        </li>
+                    </a>
+                )
+            })
+            )
+        }
+    }
 
     const getRestaurants = () => {
         if (restaurants.length <= 0 && isLoading === false) {
@@ -92,24 +124,9 @@ export function Restaurants () {
 
             <div className={styles.contentCategories}>
                 <ul>
-                    <li>
-                        <span className={styles.titleImage}>Japonesa</span>
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-                    </li>
-                    <li>
-                        <span className={styles.titleImage}>Italiana</span>
-                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-                    </li>
-                    <li>
-                        <span className={styles.titleImage}>Mexicana</span>
-                        <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="" />
-                    </li>
-                    <li>
-                        <span className={styles.titleImage}>Vegan</span>
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" />
-                    </li>
+                    <>{getCategories()}</>
                     <li className={styles.moreCategories}>
-                        <FaArrowRight size={50} />
+                        <MdAdd size={70} />
                     </li>
                 </ul>
             </div>

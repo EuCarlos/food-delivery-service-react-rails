@@ -48,10 +48,13 @@
             flex-direction: row
             margin: 0
             padding: 0
+            background: $custom-blue-dark
+            & a
+                width: calc(100% / 5)
             & li
                 background: $custom-blue-dark
                 list-style: none
-                width: calc(100% / 5)
+                // width: calc(100% / 5)
                 height: 12rem
                 overflow: hidden
                 cursor: pointer
@@ -73,12 +76,16 @@
                     font-weight: bold
                     z-index: 2
                 &.moreCategories
+                    width: calc(100% / 5)
                     display: flex
                     justify-content: center
                     align-items: center
-                    background: linear-gradient(270deg, #2B2D42 0%, #F7E733 100%)
+                    background: $custom-yellow
+                    transition: .7s all
                     &:hover
-                        background: linear-gradient(270deg, #2B2D42 30%, #F7E733 100%)
+                        background:  #F7E73388
+                    &:hover > svg
+                        fill: $custom-blue-dark
                     & svg
                         fill: $custom-full-white
                     &::after
