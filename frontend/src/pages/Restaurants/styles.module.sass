@@ -146,3 +146,45 @@
                             font-weight: bold
                             & svg
                                 vertical-align: top
+    .overlay
+        background: #313131cc
+        width: 100%
+        height: 100vh
+
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 5
+
+        display: flex
+        justify-content: center
+        align-items: center
+        & .modalBox
+            background: #fff
+            padding: 1rem
+            & .closeModal
+                cursor: pointer
+                fill: $custom-blue-dark
+                transition: fill .6s
+                &:hover
+                    fill: $custom-yellow
+            & ul
+                width: 100%
+                list-style: none
+                padding: 0
+                margin: 0
+                text-transform: capitalize
+                a
+                    color: $custom-blue-dark
+                    text-decoration: none
+                    font-size: 1.2rem 
+                    & > li
+                        width: 17rem
+                        display: flex
+                        justify-content: space-between
+                        padding: 1rem
+                        transition: background .5s
+                        &:hover
+                            background: #e0dddda2
+
+                    

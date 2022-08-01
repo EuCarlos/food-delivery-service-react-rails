@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './styles.module.sass'
-import { MdStar, MdAdd } from 'react-icons/md'
+import { MdStar, MdAdd, MdClose, MdKeyboardArrowRight } from 'react-icons/md'
 
 import ios from '../../assets/button-ios.png'
 import android from '../../assets/button-android.png'
@@ -106,8 +106,49 @@ export function Restaurants () {
         }
     }
 
+    // should display modal with category list
+    const [modal, setModal] = useState(false)
+
+    const toggleModal = () => setModal(!modal)
+
+    const Modal = () => {
+        return(
+            <div className={styles.overlay} onClick={() => toggleModal()}>
+                <div className={styles.modalBox}>
+                    <div className={styles.contentModal}>
+                        <div style={{display: 'flex', justifyContent: 'end'}}>
+                            <MdClose 
+                                className={styles.closeModal} 
+                                onClick={() => toggleModal()}
+                            />
+                        </div>
+                        <ul>
+                        {
+                            categories.map(({ title }) => {
+                                return (
+                                    <a href={`/restaurantes?category=${title}`}>
+                                        <li>
+                                            <span className={styles.titleImage}>{title}</span>
+                                            <MdKeyboardArrowRight />
+                                        </li>
+                                    </a>
+                                )
+                            })
+                        }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <section className={styles.contentWrapper}>
+            {
+                modal 
+                ? <Modal /> 
+                : null
+            }
             <div className={styles.contentTop}>
                 <div className={styles.text}>
                     <h1>Entrega<br/><span className={styles.highlight}>mais rápida</span> &<br/> <span className={styles.highlight}>coleta</span> fácil.</h1>
@@ -123,7 +164,7 @@ export function Restaurants () {
             </div>
 
             <div className={styles.contentCategories}>
-                <ul>
+                <ul onClick={() => toggleModal()}>
                     <>{getCategories()}</>
                     <li className={styles.moreCategories}>
                         <MdAdd size={70} />
