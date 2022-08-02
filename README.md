@@ -1,6 +1,17 @@
 # Food delivery MVP
 🌐 _Para a versão em português deste README, [clique aqui](./docs/locales/pt-br/README.md)._
 
+
+
+<p align="center">
+    <code>Food Delivery Service</code> is a Minimum Viable Product (MVP) application of an online food ordering and delivery platform based on iFood.</br>
+    <img src="https://img.shields.io/badge/SWAGGER_UI-1d4145?style=for-the-badge&logo=swagger&logoColor=85ea2d" alt="Logo Swagger UI"/>
+    <img src="https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white" alt="Logo Ruby on Rails" />
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="Logo React js" />
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/EuCarlos/food-delivery-service-react-rails?color=orange&style=for-the-badge">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/eucarlos/food-delivery-service-react-rails?style=for-the-badge">
+</p>
+
 ## Summary
 - [1. Requirements:](#1-requirements)
 - [2. Installation:](#2-installation)
@@ -56,7 +67,9 @@ cd frontend && yarn install
 ```bash
 yarn dev
 ```
-## 3. Routes
+## 3. Routes API
+OBS.: All route information has been documented with **Swagger UI**, and can be found in the `/doc-api` route
+
 | Prefix | Verb | URI Pattern | Controller#Action
 | :----: | :--: | :--------- | :----------------
 | categories | GET | `/api/categories(.:format)` | categories#index {:format=>:json} |
