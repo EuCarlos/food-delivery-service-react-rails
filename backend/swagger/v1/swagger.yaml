@@ -43,6 +43,28 @@ paths:
     get:
       tags:
       - "restaurant"
+      parameters:
+        - in: query
+          name: q
+          description: "filter all restaurants by query"
+          require: false
+          schema:
+            type: string
+            example: "Los Sombreros"
+        - in: query
+          name: city
+          description: "filter all restaurants by city"
+          require: false
+          schema:
+            type: string
+            example: "São Paulo"
+        - in: query
+          name: category
+          description: "filter all restaurants by category"
+          require: false
+          schema:
+            type: string
+            example: "mexicana"
       responses:
         "200":
           description: "successful operation"
@@ -278,7 +300,7 @@ definitions:
         type: string
         example: "waiting"
       city:
-        type: string"
+        type: string
         example: "Curitiba"
       street:
         type: string

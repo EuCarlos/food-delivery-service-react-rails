@@ -68,7 +68,7 @@ cd frontend && yarn install
 yarn dev
 ```
 ## 3. Routes API
-OBS.: All route information has been documented with **Swagger UI**, and can be found in the `/doc-api` route
+OBS.: All route information has been documented with **Swagger UI**, and can be found in the `/api-docs` route
 
 | Prefix | Verb | URI Pattern | Controller#Action
 | :----: | :--: | :--------- | :----------------
