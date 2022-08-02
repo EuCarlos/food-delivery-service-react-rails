@@ -31,6 +31,10 @@ paths:
       responses:
         "200":
           description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Categories"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -42,6 +46,10 @@ paths:
       responses:
         "200":
           description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Restaurants"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -60,6 +68,8 @@ paths:
       responses:
         "200":
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/Restaurants"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -73,7 +83,6 @@ paths:
       description: ""
       operationId: "placeOrder"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
@@ -81,10 +90,12 @@ paths:
         description: "order made to purchase"
         required: true
         schema:
-          $ref: "#/definitions/Order"
+          $ref: "#/definitions/Orders"
       responses:
         "200":
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/Orders"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -103,6 +114,8 @@ paths:
       responses:
         "200":
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/Order"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -111,55 +124,178 @@ paths:
     get:
       tags:
       - "cities"
+      produces:
+      - "application/json"
       responses:
         "200":
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/AvailableCities"
         "400":
           description: "Invalid ID supplied"
         "404":
           description: "City not found"
 definitions:
+  Categories:
+    type: object
+    properties:
+      id:
+        type: number
+        example: 2
+      title:
+        type: string
+        example: "italiana"
+      image_url:
+        type: string
+        example: "http://carlosalves.vercel.app/rails/active_storage/blobs/redirect/.../italian.jpeg"
+  Restaurants:
+    type: object
+    properties:
+      id:
+        type: number
+        example: 1
+      name:
+        type: string
+        example: "Los Sombreros"
+      description:
+        type: string
+        example: "Nossa missão tem sido ajudar as pessoas a alcançar seus objetivos de saúde e bem-estar. Embora tenhamos mudado ao longo dos anos, nossos valores permaneceram os mesmos."
+      delivery_tax:
+        type: number
+        example: 5.5
+      city:
+        type: string
+        example: "São Paulo"
+      street:
+        type: string
+        example: "Bela terra"
+      neighborhood:
+        type: string
+        example: "Mercês"
+      number:
+        type: string
+        example: "1393"
+      complement:
+        type: string
+        example: null
+      image_url:
+        type: array
+        items:
+          example: "http://carlosalves.vercel.app/rails/active_storage/blobs/redirect/.../1.jpg"
+      category_title:
+        type: string
+        example: "mexicana"
+      product_categories:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: number
+              example: 1
+            title:
+              type: string
+              example: "Pratos Mexicanos"
+            products:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  name:
+                    type: string
+                    example: "Nacho Guacamole"
+                  description:
+                    type: string
+                    example: "Tortilhas com Guacamole"
+                  price:
+                    type: number
+                    example: 19.27
+                  image_url:
+                    type: string
+                    example: "http://carlosalves.vercel.app/rails/active_storage/blobs/redirect/.../nachosg.jpg"
+        
+        
   Products_attributes:
-    type: "object"
+    type: object
     properties:
       quantity:
-        type: "integer"
+        type: integer
         example: 2
       product_id:
-        type: "integer"
+        type: integer
         example: 6
-  Order:
-    type: "object"
+  Orders:
+    type: object
     properties:
       order:
-        type: "object"
+        type: object
         formart: "int64"
         properties:
           restaurant_id:
-            type: "integer"
+            type: integer
             example: 9
           name:
-            type: "string"
+            type: string
             example: "Carlos Alves"
           phone_number:
-            type: "string"
+            type: string
             example: "(22) 91234-5678"
           city:
-            type: "string"
+            type: string
             example: "Curitiba"
           street:
-            type: "string"
+            type: string
             example: "São João"
           neighborhood:
-            type: "string"
+            type: string
             example: "Tingui"
           number:
-            type: "string"
+            type: string
             example: "115"
           complement:
-            type: "string"
+            type: string
             example: "apartamento 4"
           order_products_attributes:
-            type: "array"
+            type: array
             items: 
               $ref: "#/definitions/Products_attributes"
+  Order:
+    type: object
+    properties:
+      id:
+        type: number
+        example: 1
+      restaurant_id:
+        type: number
+        example: 3
+      total_value:
+        type: number
+        example: 195.5
+      status:
+        type: string
+        example: "waiting"
+      city:
+        type: string"
+        example: "Curitiba"
+      street:
+        type: string
+        example: "São João"
+      neighborhood:
+        type: string
+        example: "Tingui"
+      number:
+        type: string
+        example: "115"
+      complement:
+        type: string
+        example: "BL A AP 4"
+  AvailableCities:
+    type: object
+    properties:
+      available_cities:
+        type: array
+        items: 
+          example: ["São Paulos", "Curitiba", "Maceio"]
